@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const tasks = require("./routes/tasks");
 const connectDB = require("./db/connect");
+const notFound = require("./middleware/not-found");
 require("dotenv").config();
 
 const PORT = 3000;
@@ -11,11 +12,9 @@ app.use(express.static("./public"));
 app.use(express.json());
 
 // routes
-app.get("/hello", (req, res) => {
-  res.send("Task Manger App.");
-});
-
 app.use("/api/v1/tasks", tasks);
+
+app.use(notFound);
 
 const start = async () => {
   try {
