@@ -3,14 +3,13 @@ const connectionString =
 
 const mongoose = require("mongoose");
 
-mongoose
-  .connect(connectionString, {
+const connectDB = (url) => {
+  return mongoose.connect(connectionString, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
     useFindAndModify: false,
-  })
-  .then(() => console.log(`Connected to DB.`))
-  .catch((err) =>
-    console.error(`Error Occured while Connecting to DB: ${err}`)
-  );
+  });
+};
+
+module.exports = connectDB;
